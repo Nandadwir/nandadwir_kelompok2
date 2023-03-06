@@ -11,8 +11,9 @@
 				</div>
         			<div class="card shadow">
         				<div class="card-body">
+						<a href="<?= base_url('master/add_masyarakat'); ?>" class="btn btn-dark mb-3"><i class="fa fa-plus"></i> Tambah Data Masyarakat</a>
         					<table class="table table-striped table-bordered" id="myTable">
-        						<thead class="table-info">
+        						<thead class="table-dark">
         							<tr>
         								<th>No</th>
         								<th>Nama</th>

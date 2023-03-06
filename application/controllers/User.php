@@ -15,8 +15,8 @@ class User extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Aplikasi Pengaduan Masyarakat | Home';
-		$data['pengguna'] = $this->db->get_where('tbl_masyarakat', ['username' => $this->session->userdata('username')])->row_array();
+		$data['title'] = 'Dashboard';
+		$data['pengguna'] = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $data);
@@ -27,7 +27,7 @@ class User extends CI_Controller
 	public function edit()
 	{
 		$data['title'] = 'Edit Profile';
-		$data['pengguna'] = $this->db->get_where('tbl_masyarakat', ['username' => $this->session->userdata('username')])->row_array();
+		$data['pengguna'] = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
 		$this->form_validation->set_rules('nama', 'nama', 'required|trim|min_length[3]', [
 			'required' => 'Nama harus di isi',
 			'min_length' => 'Nama min 3 huruf'
@@ -46,9 +46,9 @@ class User extends CI_Controller
 	public function edit_telp()
 	{
 		$data['title'] = 'Edit No Telp';
-		$data['pengguna'] = $this->db->get_where('tbl_masyarakat', ['username' => $this->session->userdata('username')])->row_array();
+		$data['pengguna'] = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
 
-		$this->form_validation->set_rules('telp', 'telp', 'required|trim|numeric|min_length[11]|max_length[13]|is_unique[tbl_masyarakat.no_telp]', [
+		$this->form_validation->set_rules('telp', 'telp', 'required|trim|numeric|min_length[11]|max_length[13]|is_unique[masyarakat.no_telp]', [
 			'required' => 'No telp harus di isi',
 			'numeric' => 'No telp harus angka',
 			'min_length' => 'No telp min 11 angka',
@@ -69,7 +69,7 @@ class User extends CI_Controller
 	public function edit_password()
 	{
 		$data['title'] = 'Edit Password';
-		$data['pengguna'] = $this->db->get_where('tbl_masyarakat', ['username' => $this->session->userdata('username')])->row_array();
+		$data['pengguna'] = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->form_validation->set_rules('pl', 'pl', 'required|trim', ['required' => 'Password lama harus di isi']);
 		$this->form_validation->set_rules('pb', 'pb', 'required|trim|min_length[5]|matches[kpb]', [

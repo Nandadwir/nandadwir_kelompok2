@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Feb 2021 pada 02.25
+-- Waktu pembuatan: 05 Apr 2021 pada 10.55
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -25,36 +25,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_admin`
+-- Struktur dari tabel `petugas`
 --
 
-CREATE TABLE `tbl_admin` (
+CREATE TABLE `petugas` (
   `id_admin` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `no_telp` varchar(15) NOT NULL,
-  `level` int(1) NOT NULL,
-  `aktif` int(1) NOT NULL
+  `level` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_admin`
+-- Dumping data untuk tabel `petugas`
 --
 
-INSERT INTO `tbl_admin` (`id_admin`, `nama`, `username`, `password`, `no_telp`, `level`, `aktif`) VALUES
-(1, 'Didik Setya', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '085806021328', 1, 1),
-(6, 'Budi Utomo', 'petugas1', '827ccb0eea8a706c4c34a16891f84e7b', '085339098156', 1, 1),
-(7, 'Ahmad Jaya', 'petugas2', '827ccb0eea8a706c4c34a16891f84e7b', '085669087236', 2, 1),
-(8, 'Didik Setiawan Admin 2', 'petugas3', '827ccb0eea8a706c4c34a16891f84e7b', '081229098765', 2, 1);
+-- INSERT INTO `petugas` (`id_admin`, `nama`, `username`, `password`, `no_telp`, `level`) VALUES
+(1, 'Your Name', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '08580602131', 1),
+-- (10, 'Dicky Suadarsoro', 'petugas1', '827ccb0eea8a706c4c34a16891f84e7b', '082338990881', 2),
+-- (11, 'Erpan Anjayni', 'petugas2', '827ccb0eea8a706c4c34a16891f84e7b', '085770293556', 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_masyarakat`
+-- Struktur dari tabel `masyarakat`
 --
 
-CREATE TABLE `tbl_masyarakat` (
+CREATE TABLE `masyarakat` (
   `nik` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -64,20 +62,19 @@ CREATE TABLE `tbl_masyarakat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_masyarakat`
+-- Dumping data untuk tabel `masyarakat`
 --
 
-INSERT INTO `tbl_masyarakat` (`nik`, `nama`, `username`, `password`, `no_telp`, `aktif`) VALUES
-('98033901223808734', 'Ahmad Hamdai', 'Hamdai', 'd8578edf8458ce06fbc5bb76a58c5ca4', '0823389908809', 1),
-('0927810293748901', 'Didik Masyarakat', 'admin', 'd8578edf8458ce06fbc5bb76a58c5ca4', '082334567190', 1);
+-- INSERT INTO `masyarakat` (`nik`, `nama`, `username`, `password`, `no_telp`, `aktif`) VALUES
+-- ('2019278354617829', 'Alfin Kurniamega', 'alfin', '827ccb0eea8a706c4c34a16891f84e7b', '082341562782', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pengaduan`
+-- Struktur dari tabel `pengaduan`
 --
 
-CREATE TABLE `tbl_pengaduan` (
+CREATE TABLE `pengaduan` (
   `id_pengaduan` int(11) NOT NULL,
   `tgl_pengaduan` date NOT NULL,
   `nik` varchar(20) NOT NULL,
@@ -87,20 +84,19 @@ CREATE TABLE `tbl_pengaduan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_pengaduan`
+-- Dumping data untuk tabel `pengaduan`
 --
 
-INSERT INTO `tbl_pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `isi_laporan`, `foto`, `status`) VALUES
-(1613376170, '2021-02-15', '98033901223808734', 'Laporan Percobaan :)', 'photo-1539511977266-f0b884a7ee39.jpeg', 0),
-(1613717776, '2021-02-19', '0927810293748901', 'Percobaan By me', 'anjir.jpeg', 0);
+-- INSERT INTO `pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `isi_laporan`, `foto`, `status`) VALUES
+-- (1617611599, '2021-04-05', '2019278354617829', 'Banjir di dusun Banjarjo desa Gunungsari', 'anjir.jpeg', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_tanggapan`
+-- Struktur dari tabel `tanggapan`
 --
 
-CREATE TABLE `tbl_tanggapan` (
+CREATE TABLE `tanggapan` (
   `id_tanggapan` int(11) NOT NULL,
   `id_pengaduan` int(11) NOT NULL,
   `tgl_tanggapan` date NOT NULL,
@@ -109,25 +105,32 @@ CREATE TABLE `tbl_tanggapan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `tanggapan`
+--
+
+-- INSERT INTO `tanggapan` (`id_tanggapan`, `id_pengaduan`, `tgl_tanggapan`, `tanggapan`, `id_admin`) VALUES
+-- (1617612457, 1617611599, '2021-04-05', 'Ok Gan tim banser dalam perjalanan', 1);
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tbl_admin`
+-- Indeks untuk tabel `petugas`
 --
-ALTER TABLE `tbl_admin`
+ALTER TABLE `petugas`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `tbl_pengaduan`
+-- Indeks untuk tabel `pengaduan`
 --
-ALTER TABLE `tbl_pengaduan`
+ALTER TABLE `pengaduan`
   ADD PRIMARY KEY (`id_pengaduan`);
 
 --
--- Indeks untuk tabel `tbl_tanggapan`
+-- Indeks untuk tabel `tanggapan`
 --
-ALTER TABLE `tbl_tanggapan`
+ALTER TABLE `tanggapan`
   ADD PRIMARY KEY (`id_tanggapan`);
 
 --
@@ -135,10 +138,10 @@ ALTER TABLE `tbl_tanggapan`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_admin`
+-- AUTO_INCREMENT untuk tabel `petugas`
 --
-ALTER TABLE `tbl_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `petugas`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

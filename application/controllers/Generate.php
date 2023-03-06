@@ -1,6 +1,7 @@
 <?php
-require_once FCPATH .'asset/dompdf/autoload.inc.php';
+// require_once FCPATH .'asset\dompdf\src\Dompdf.php';
 use Dompdf\Dompdf;
+
 
 class Generate extends CI_Controller{
 
@@ -11,8 +12,8 @@ class Generate extends CI_Controller{
     }
 
     public function index(){
-        $data['title'] = 'Aplikasi Pengaduan Masyarakat | Home';
-		$data['pengguna'] = $this->db->get_where('tbl_admin',['username' => $this->session->userdata('username')])->row_array();
+        $data['title'] = 'Aplikasi Pelaporan Pengaduan Masyarakat';
+		$data['pengguna'] = $this->db->get_where('petugas',['username' => $this->session->userdata('username')])->row_array();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $data);
@@ -23,7 +24,7 @@ class Generate extends CI_Controller{
     private function to_generate($html, $filename = ''){
         $pdf = new Dompdf();
         $pdf->loadHtml($html);
-        $pdf->setPaper('A4','portrait');
+        $pdf->setPaper('A4','po rtrait');
         $pdf->render();
         $pdf->stream($filename . 'pdf', array('Attachment' => 0));
     }
@@ -31,8 +32,9 @@ class Generate extends CI_Controller{
     public function gen_pengaduan(){
         $tglAwal = $this->input->post('tglAwal');
         $tglAkhir = $this->input->post('tglAkhir');
+        $status = $this->input->post('status');
 
-        $data['pengaduan'] = $this->M_generate->getPengaduanByTgl($tglAwal, $tglAkhir);
+        $data['pengaduan'] = $this->M_generate->getPengaduanByTgl($tglAwal, $tglAkhir, $status);
        
        $html = $this->load->view('generate/pengaduan', $data, true);
        $this->to_generate($html, 'Data Laporan Pengaduan');
@@ -49,5 +51,10 @@ class Generate extends CI_Controller{
         $data['petugas'] = $this->M_generate->getPetugasAll();
         $html = $this->load->view('generate/petugas', $data, true);
         $this->to_generate($html, 'Data Petugas');
+    }
+    public function gen_admin(){
+        $data['petugas'] = $this->M_generate->getAdminAll();
+        $html = $this->load->view('generate/admin', $data, true);
+        $this->to_generate($html, 'Data Admin');
     }
 }

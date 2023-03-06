@@ -2,7 +2,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Dashboard User</h1>
+          <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
           <div class="container">
             <div class="row">
@@ -10,7 +10,7 @@
                 <div class="card shadow">
                   <div class="row no-gutters">
                     <div class="col-md-4">
-                      <img src="<?= base_url('asset/img/images.png'); ?>" class="img-thumbnail">
+                      <img width="75%" src="<?= base_url('asset/img/profilku.jpg'); ?>" class="img-thumbnail">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body">

@@ -41,8 +41,6 @@
                                     <div class="form-group">
                                         <label>Level</label>
                                         <select name="level" class="form-control">
-                                            <option value=""><- Pilih salah satu -></option>
-                                            <option value="1">Admin</option>
                                             <option value="2">Petugas</option>
                                         </select>
                                         <?= form_error('level','<small class="text-danger">','</small>'); ?>

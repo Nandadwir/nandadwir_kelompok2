@@ -12,7 +12,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2">No telp</label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="telp" value="<?= $pengguna['no_telp']; ?>" class="form-control">
+                                        <input type="number" name="telp" value="<?= $pengguna['no_telp']; ?>" class="form-control">
                                         <?= form_error('telp', '<small class="text-danger">', '</small>'); ?>
                                     </div>
                                 </div>

@@ -15,9 +15,11 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <table class="table table-striped table-bordered" id="myTable">
-                            <thead class="table-info">
+                            <thead class="table-dark">
                                 <tr>
                                     <th>Tanggal</th>
+                                    <th>Foto Bukti</th>
+                                    <th>Nama Pelapor</th>
                                     <th>Isi Pengaduan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -25,23 +27,27 @@
                             </thead>
                             <tbody>
                             <?php foreach($pengaduan as $p){ ?>
-                            <strong>
-                                <tr>
-                                    <td><?= date('d M Y H:i:s', $p->id_pengaduan); ?></td>
-                                    <td><?= $p->isi_laporan; ?></td>
-                                    <td>
-                                        <?php if($p->status == 1): ?>
-                                            Selesai
-                                        <?php else: ?>
-                                            Proses
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="<?= base_url('pengaduan/del_pengaduan/') . $p->id_pengaduan; ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></a>
-                                        <a href="<?= base_url('pengaduan/detail/') . md5($p->id_pengaduan); ?>" class="btn btn-primary btn-sm"><i class="fa fa-arrow-right"></i></a>
-                                    </td>
-                                </tr>
-                                </strong>
+                                <?php if($p->status_diterima == "diterima"): ?>
+                                <strong>
+                                    <tr>
+                                        <td><?= date('d M Y H:i:s', $p->id_pengaduan); ?></td>
+                                        <td><img src="<?= base_url('asset/upload/') . $p->foto; ?>" width="200px"></td>
+                                        <td><?= $p->nama; ?></td>
+                                        <td><?= $p->isi_laporan; ?></td>
+                                        <td>
+                                            <?php if($p->status == 1): ?>
+                                                Selesai
+                                            <?php else: ?>
+                                                Proses
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url('pengaduan/del_pengaduan/') . $p->id_pengaduan; ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i></a>
+                                            <a href="<?= base_url('pengaduan/detail/') . md5($p->id_pengaduan); ?>" class="btn btn-primary btn-sm"><i class="fa fa-arrow-right"></i></a>
+                                        </td>
+                                    </tr>
+                                    </strong>
+                                    <?php endif; ?>
                             <?php } ?>
                             </tbody>
                         </table>

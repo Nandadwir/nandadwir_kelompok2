@@ -5,30 +5,30 @@ class M_user extends CI_Model
     public function getLaporanByNIK()
     {
         $nik = $this->session->userdata('nik');
-        $query = "SELECT * FROM tbl_pengaduan INNER JOIN tbl_masyarakat ON tbl_pengaduan.nik = tbl_masyarakat.nik WHERE tbl_masyarakat.nik = $nik";
+        $query = "SELECT * FROM pengaduan INNER JOIN masyarakat ON pengaduan.nik = masyarakat.nik WHERE masyarakat.nik = $nik";
         return $this->db->query($query)->result();
     }
 
     public function getLaporanById($id)
     {
-        return $this->db->get_where('tbl_pengaduan', ['md5(id_pengaduan)' => $id])->row();
+        return $this->db->get_where('pengaduan', ['md5(id_pengaduan)' => $id])->row();
     }
 
     public function getPengaduanJoinMasyarakat($id, $nik)
     {
-        $pengaduan = $this->db->get_where('tbl_pengaduan', ['md5(id_pengaduan)' => $id])->row();
+        $pengaduan = $this->db->get_where('pengaduan', ['md5(id_pengaduan)' => $id])->row();
         $id_pengaduan = $pengaduan->id_pengaduan;
 
-        $query = "SELECT * FROM tbl_pengaduan INNER JOIN tbl_masyarakat ON tbl_pengaduan.nik = tbl_masyarakat.nik WHERE tbl_pengaduan.id_pengaduan = $id_pengaduan AND tbl_masyarakat.nik = $nik";
+        $query = "SELECT * FROM pengaduan INNER JOIN masyarakat ON pengaduan.nik = masyarakat.nik WHERE pengaduan.id_pengaduan = $id_pengaduan AND masyarakat.nik = $nik";
         return $this->db->query($query)->row();
     }
 
     public function getTanggapanJoinAdmin($id)
     {
-        $tanggapan = $this->db->get_where('tbl_pengaduan', ['md5(id_pengaduan)' => $id])->row();
+        $tanggapan = $this->db->get_where('pengaduan', ['md5(id_pengaduan)' => $id])->row();
         $id_pengaduan = $tanggapan->id_pengaduan;
 
-        $query = "SELECT * FROM tbl_tanggapan INNER JOIN tbl_admin ON tbl_tanggapan.id_admin = tbl_admin.id_admin WHERE tbl_tanggapan.id_pengaduan = $id_pengaduan ORDER BY tbl_tanggapan.id_tanggapan DESC";
+        $query = "SELECT * FROM tanggapan INNER JOIN petugas ON tanggapan.id_admin = petugas.id_admin WHERE tanggapan.id_pengaduan = $id_pengaduan ORDER BY tanggapan.id_tanggapan DESC";
         return $this->db->query($query)->result();
     }
 
@@ -54,13 +54,14 @@ class M_user extends CI_Model
         $data = [
             'id_pengaduan' => time(),
             'tgl_pengaduan' => date('Y-m-d'),
+            'nama' => $this->session->userdata('username'),
             'nik' => $this->session->userdata('nik'),
             'isi_laporan' => htmlspecialchars($this->input->post('isi')),
             'foto' => $foto,
             'status' => 0
         ];
 
-        if ($this->db->insert('tbl_pengaduan', $data)) {
+        if ($this->db->insert('pengaduan', $data)) {
             $this->session->set_flashdata('true', 'Laporan pengaduan berhasil di kirim');
             redirect('laporan');
         } else {
@@ -90,7 +91,7 @@ class M_user extends CI_Model
         $this->db->set('isi_laporan', htmlspecialchars($this->input->post('isi')));
         $this->db->set('foto', $foto);
         $this->db->where('md5(id_pengaduan)', $id);
-        if ($this->db->update('tbl_pengaduan')) {
+        if ($this->db->update('pengaduan')) {
             $this->session->set_flashdata('true', 'Laporan pengaduan berhasil di edit');
             redirect('laporan');
         } else {
@@ -101,10 +102,10 @@ class M_user extends CI_Model
 
     public function hapus($id)
     {
-        $laporan = $this->db->get_where('tbl_pengaduan', ['md5(id_pengaduan)' => $id])->row();
+        $laporan = $this->db->get_where('pengaduan', ['md5(id_pengaduan)' => $id])->row();
         unlink(FCPATH . 'asset/upload/' . $laporan->foto);
-        if ($this->db->delete('tbl_pengaduan', ['md5(id_pengaduan)' => $id])) {
-            $this->db->delete('tbl_tanggapan', ['md5(id_pengaduan)' => $id]);
+        if ($this->db->delete('pengaduan', ['md5(id_pengaduan)' => $id])) {
+            $this->db->delete('tanggapan', ['md5(id_pengaduan)' => $id]);
             $this->session->set_flashdata('true', 'Laporan pengaduan berhasil di hapus');
             redirect('laporan');
         } else {
@@ -117,7 +118,7 @@ class M_user extends CI_Model
     {
         $this->db->set('nama', htmlspecialchars($this->input->post('nama')));
         $this->db->where('username', $this->session->userdata('username'));
-        if ($this->db->update('tbl_masyarakat')) {
+        if ($this->db->update('masyarakat')) {
             $this->session->set_flashdata('true', 'Nama berhasil di edit');
             redirect('user/edit');
         } else {
@@ -130,7 +131,7 @@ class M_user extends CI_Model
     {
         $this->db->set('no_telp', htmlspecialchars($this->input->post('telp')));
         $this->db->where('username', $this->session->userdata('username'));
-        if ($this->db->update('tbl_masyarakat')) {
+        if ($this->db->update('masyarakat')) {
             $this->session->set_flashdata('true', 'No telp berhasil di edit');
             redirect('user/edit');
         } else {
@@ -143,7 +144,7 @@ class M_user extends CI_Model
     {
         $oldpass = $this->input->post('pl');
         $newpass = $this->input->post('pb');
-        $user = $this->db->get_where('tbl_masyarakat', ['username' => $this->session->userdata('username')])->row();
+        $user = $this->db->get_where('masyarakat', ['username' => $this->session->userdata('username')])->row();
 
         if ($newpass != $oldpass) {
             if ($user->password == md5($oldpass)) {
@@ -158,7 +159,7 @@ class M_user extends CI_Model
         }
         $this->db->set('password', $pass);
         $this->db->where('username', $this->session->userdata('username'));
-        if ($this->db->update('tbl_masyarakat')) {
+        if ($this->db->update('masyarakat')) {
             $this->session->set_flashdata('true', 'Password berhasil di edit');
             redirect('user/edit');
         } else {

@@ -9,7 +9,7 @@
                   <div class="card shadow">
                       <div class="card-body">
                         <table class="table table-striped table-bordered">
-                            <thead class="table-info">
+                            <thead class="table-dark">
                                 <tr>
                                    <th>Buat laporan</th>
                                    <th>Aksi</th>
@@ -17,16 +17,20 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>Buat Laporan Admin</td>
+                                    <td><a href="<?= base_url('generate/gen_admin'); ?>" target="_blank" class="btn btn-info col-5"><i class="fa fa-download"></i> Laporan Admin</a></td>
+                                </tr>
+                                <tr>
                                     <td>Buat Laporan Petugas</td>
-                                    <td><a href="<?= base_url('generate/gen_petugas'); ?>" target="_blank" class="btn btn-success"><i class="fa fa-download"></i> Generate laporan</a></td>
+                                    <td><a href="<?= base_url('generate/gen_petugas'); ?>" target="_blank" class="btn btn-info col-5"><i class="fa fa-download"></i> Laporan Petugas</a></td>
                                 </tr>
                                 <tr>
                                     <td>Buat laporan Masyarakat</td>
-                                    <td><a href="<?= base_url('generate/gen_masyarakat'); ?>" target="_blank" class="btn btn-success"><i class="fa fa-download"></i> Generate laporan</a></td>
+                                    <td><a href="<?= base_url('generate/gen_masyarakat'); ?>" target="_blank" class="btn btn-info col-5"><i class="fa fa-download"></i> Laporan Masyarakat</a></td>
                                 </tr>
                                 <tr>
                                     <td>Buat laporan Pengaduan</td>
-                                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-filter"></i> Filter Tanggal</button></td>
+                                    <td><button type="button" class="btn btn-info col-5" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-filter"></i> Laporan Pengaduan</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -66,12 +70,22 @@
                     <input type="date" name="tglAkhir" class="form-control" value="<?= date('Y-m-d'); ?>">
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                  <label>Status</label>
+                  <select name="status" class="form-control">
+                        <option value="">Semua</option>
+                        <option value="0">Proses</option>
+                        <option value="1">Selesai</option>
+                      </select>
+                </div>
+              </div>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary">Generate</button>
+        <button type="submit" class="btn btn-primary">Laporan</button>
       </div>
         </form>
     </div>

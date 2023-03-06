@@ -13,11 +13,11 @@ class Admin extends CI_Controller
 	}
 	public function index()
 	{
-		$data['title'] = 'Aplikasi Pengaduan Masyarakat | Home';
-		$data['pengguna'] = $this->db->get_where('tbl_admin', ['username' => $this->session->userdata('username')])->row_array();
+		$data['title'] = 'Aplikasi Pelaporan Pengaduan Masyarakat';
+		$data['pengguna'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
 		$this->db->limit(5);
 		$this->db->order_by('id_pengaduan', 'DESC');
-		$data['pengaduan'] = $this->db->get('tbl_pengaduan')->result();
+		$data['pengaduan'] = $this->db->get('pengaduan')->result();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $data);
@@ -28,7 +28,7 @@ class Admin extends CI_Controller
 	public function edit()
 	{
 		$data['title'] = 'Edit Profile';
-		$data['pengguna'] = $this->db->get_where('tbl_admin', ['username' => $this->session->userdata('username')])->row_array();
+		$data['pengguna'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
 		$this->form_validation->set_rules('nama', 'nama', 'required|trim|min_length[3]', [
 			'required' => 'Nama harus di isi',
 			'min_length' => 'Nama min 3 huruf'
@@ -47,8 +47,8 @@ class Admin extends CI_Controller
 	public function edit_Telp()
 	{
 		$data['title'] = 'Edit No Telp';
-		$data['pengguna'] = $this->db->get_where('tbl_admin', ['username' => $this->session->userdata('username')])->row_array();
-		$this->form_validation->set_rules('telp', 'telp', 'required|trim|min_length[11]|max_length[13]|is_unique[tbl_admin.no_telp]|numeric', [
+		$data['pengguna'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
+		$this->form_validation->set_rules('telp', 'telp', 'required|trim|min_length[11]|max_length[13]|is_unique[petugas.no_telp]|numeric', [
 			'required' => 'No telp harus di isi',
 			'min_length' => 'No telp min 11 angka',
 			'is_unique' => 'No telp sudah terdaftar, coba dengan no telp lain',
@@ -69,7 +69,7 @@ class Admin extends CI_Controller
 	public function edit_password()
 	{
 		$data['title'] = 'Edit Password';
-		$data['pengguna'] = $this->db->get_where('tbl_admin', ['username' => $this->session->userdata('username')])->row_array();
+		$data['pengguna'] = $this->db->get_where('petugas', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->form_validation->set_rules('pl', 'pl', 'required|trim', ['required' => 'Password lama harus di si']);
 		$this->form_validation->set_rules('pb', 'pb', 'required|trim|min_length[5]|matches[kpb]', [

@@ -1,65 +1,59 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-	<title>Aplikasi Pengaduan Masyarakat | Login Page</title>
-	<link rel="stylesheet" type="text/css" href="<?= base_url('asset/bootstrap/'); ?>css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('asset/bootstrap/'); ?>css/style.css">
-</head>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-<body>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="<?= base_url('asset/login/') ?>css/style.css">
 
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6" id="img">
-				<img src="<?= base_url('asset/'); ?>img/login.svg" id="thumbnail">
+	</head>
+	<body class="img js-fullheight" style="background-image: url(<?= base_url('asset/login/') ?>images/bg.jpg);">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Aplikasi Pengaduan Masyarakat</h2>
+				</div>
 			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Login Page</h3>
+		      	<form action="<?= base_url('auth'); ?>" method="post">
+                    <div class="form-group">
+                        <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
+                        <input type="text" name="username" class="form-control" placeholder="Username" id="form" autocomplete="off">
+                    </div>
 
-			<div class="col-lg-6" id="card">
-				<h5 class="text-center">Aplikasi Pengaduan Masyarakat</h5>
-				<h6 class="text-center">Login Page</h6>
-				<div class="card" style="border: none;">
-					<div class="card-body">
+                    <div class="form-group">
+                        <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
+                        <input type="password" name="password" class="form-control" placeholder="Password" id="form">
+                    </div>
 
-						<?php if ($this->session->flashdata('true')) : ?>
-							<div class="alert alert-success alert-dismissible fade show" role="alert">
-								<?= $this->session->flashdata('true'); ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-						<?php elseif ($this->session->flashdata('false')) : ?>
-							<div class="alert alert-danger alert-dismissible fade show" role="alert">
-								<?= $this->session->flashdata('false'); ?>
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-						<?php endif; ?>
-
-						<form action="<?= base_url('auth'); ?>" method="post">
-							<div class="form-group">
-								<?= form_error('username', '<small class="text-danger">', '</small>'); ?>
-								<input type="text" name="username" class="form-control" placeholder="Username" id="form" autocomplete="off">
-							</div>
-
-							<div class="form-group">
-								<?= form_error('password', '<small class="text-danger">', '</small>'); ?>
-								<input type="password" name="password" class="form-control" placeholder="Password" id="form">
-							</div>
-
-							<button type="submit" id="btn" class="btn">Login</button>
-							<p class="text-center mt-2">Belum punya akun, <a href="<?= base_url('auth/register'); ?>">Daftar</a> di sini</p>
-						</form>
-					</div>
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+					<a href="<?= base_url('auth/register') ?>"><center>Register</center></a>
+	            </div>
+	           
+	            </div>
+	          </form>
+	         
+		      </div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
+	<script src="<?= base_url('asset/register/') ?>js/jquery.min.js"></script>
+  <script src="<?= base_url('asset/register/') ?>js/popper.js"></script>
+  <script src="<?= base_url('asset/register/') ?>js/bootstrap.min.js"></script>
+  <script src="<?= base_url('asset/register/') ?>js/main.js"></script>
 
-	<script src="<?= base_url('asset/bootstrap/'); ?>js/bootstrap.min.js"></script>
-	<script src="<?= base_url('asset/bootstrap/'); ?>js/jquery.js"></script>
-</body>
-
+	</body>
 </html>
+

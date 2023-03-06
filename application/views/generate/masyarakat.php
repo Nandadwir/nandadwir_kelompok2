@@ -37,7 +37,7 @@
             padding : 8px 8px;
             border-left : 1px solid #778899;
             margin-bottom : 1px solid #778899;
-            background : #87cefa;
+            background : #A9A9A9;
         }
 
         table tr {
@@ -55,9 +55,9 @@
 </head>
 <body>
     <div id="head">
-        <h2 class="text-center">Aplikasi Pengaduan Masyarakat</h2>
-        <h5 class="text-center">Laporan Masyarakat</h5>
+        <h2 class="text-center">Aplikasi Pelaporan Pengaduan Masyarakat</h2>
         <hr>
+        <h3 class="text-center">Laporan Masyarakat</h3>
     </div>
 
     <?php if(empty($masyarakat)): ?>
@@ -86,5 +86,6 @@
         </tbody>
     </table>
     <?php endif; ?>
+    <h5 class="text-center">UKK KELOMPOK 2</h5>
 </body>
 </html>

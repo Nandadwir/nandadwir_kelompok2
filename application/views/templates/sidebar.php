@@ -1,19 +1,28 @@
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-success sidebar sidebar-dark accordion" id="accordionSidebar">
+          <!-- Sidebar -->
+          <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon">
-          <i class="fas fa-comments"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Pengaduan Masyarakat</div>
-      </a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+              <div class="sidebar-brand-icon">
+                <i class="fas fa fw fa-city"></i>
+              </div>
+              <div class="sidebar-brand-text">Pelaporan Pengaduan</div>
+            </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+          <?php if ($this->session->userdata('level')) : ?>
+            Admin
+          <?php elseif ($this->session->userdata('nik')) : ?>
+            User
+          <?php endif; ?>
+      </div>
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
@@ -26,60 +35,7 @@
             <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        <?php if ($this->session->userdata('level')) : ?>
-          Admin
-        <?php elseif ($this->session->userdata('nik')) : ?>
-          User
-        <?php endif; ?>
-      </div>
-
-      <?php if ($this->session->userdata('level')) : ?>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <?php if ($this->session->userdata('level') == 1) : ?>
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fas fa-fw fa-database"></i>
-              <span>Management Data</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('master/masyarakat'); ?>">Data Masyarakat</a>
-                <a class="collapse-item" href="<?= base_url('master/petugas'); ?>">Data Petugas</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('generate '); ?>">
-              <i class="fas fa-fw fa-download"></i>
-              <span>Buat Laporan</span></a>
-          </li>
-
-        <?php endif; ?>
-
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('pengaduan '); ?>">
-            <i class="fas fa-fw fa-file"></i>
-            <span>Data Pengaduan</span></a>
-        </li>
-
-
-
-      <?php elseif ($this->session->userdata('nik')) : ?>
-
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('laporan'); ?>">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Laporan Pengaduan</span></a>
-        </li>
-      <?php endif; ?>
-
+      <!-- Nav Item edit profil -->
       <li class="nav-item">
         <?php if ($this->session->userdata('level')) : ?>
           <a class="nav-link" href="<?= base_url('admin/edit'); ?>">
@@ -90,10 +46,77 @@
             <span>Edit Profile</span></a>
       </li>
 
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+          <div class="sidebar-heading">
+                            Data
+                        </div>
+      <?php if ($this->session->userdata('level')) : ?>
+
+        <!-- Nav Item - Data -->
+        <?php if ($this->session->userdata('level') == 1) : ?>
+
+          <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('master/admin'); ?>">
+            <i class="fas fw fa-user-tie"></i>
+            <span>Data Admin</span></a>
+        
+          <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('master/petugas'); ?>">
+            <i class="fas fa-user-friends"></i>
+            <span>Data Petugas</span></a>
+
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('master/masyarakat'); ?>">
+            <i class="fas fa-users"></i>
+            <span>Data Masyarakat</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('pengaduan '); ?>">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Data Pengaduan</span></a>
+        </li>
+
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+                        laporan
+                    </div>
+        <!-- Nav Item - Laporan -->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('generate '); ?>">
+              <i class="fas fa-fw fa-download"></i>
+              <span>Buat Laporan</span></a>
+          </li>
+        <?php endif; ?>
+
+      <?php elseif ($this->session->userdata('nik')) : ?>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('laporan'); ?>">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Laporan Pengaduan</span></a>
+        </li>
+      <?php endif; ?>
+
+      <?php if ($this->session->userdata('level') == 2) : ?>
+        
+        <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('pengaduan'); ?>">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Data Pengaduan</span></a>
+      <?php endif; ?>
+
+      <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+                        Keluar
+                    </div>
+      <!-- Nav Item - Logout -->
       <li class="nav-item">
         <a class="nav-link logout" href="<?= base_url('auth/logout'); ?>">
           <i class="fas fa-fw fa-sign-out-alt"></i>
-          <span>Logout</span></a>
+          <span>Keluar</span></a>
       </li>
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
